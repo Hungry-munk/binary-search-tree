@@ -1,3 +1,5 @@
+import { mergeSort, removeDuplicates } from "./arrayFuncs.js";
+
 export class Node {
     constructor(value = null, left = null, right = null) {
         this.value = value;
@@ -7,7 +9,5 @@ export class Node {
 }
 
 export class Tree {
-    constructor () {
-        
-    }
+    constructor(array) {}
 }
