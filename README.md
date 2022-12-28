@@ -20,7 +20,6 @@ Includes the following methods:
 Also included is a small script that tests most of the tree's functionality.
 
 P.S.
-
 I stole this README from someone elses TOP project but it does the exact same thing so it dont matter...
 
 but heres credits anyway: https://github.com/JoshDevHub/JavaScript-Binary-Search-Tree
