@@ -5,5 +5,4 @@ const BST = new Tree(exampleArray);
 
 BST.root = BST.buildTree();
 BST.prettyPrint();
-BST.delete(9);
-BST.prettyPrint();
+console.log(BST.levelOrder());

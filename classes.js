@@ -80,4 +80,22 @@ export class Tree {
         }
         return node;
     }
+
+    levelOrder(callBackFn) {
+        //need root element
+        if (!this.root) return [];
+        //  queue for storing discovere nodes
+        const queue = [this.root];
+        const values = [];
+        while (queue.length) {
+            const currentNode = queue.shift();
+            if (currentNode.left) queue.push(currentNode.left);
+            if (currentNode.right) queue.push(currentNode.right);
+            callBackFn
+                ? callBackFn(currentNode)
+                : values.push(currentNode.value);
+        }
+
+        if (!callBackFn) return values
+    }
 }
