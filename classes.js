@@ -22,12 +22,12 @@ export class Tree {
         const node = new Node(array[mid]);
 
         node.left = this.buildTree(array.slice(0, mid));
-        node.right = this.buildTree(array.slice(mid + 1, array.length - 1));
+        node.right = this.buildTree(array.slice(mid + 1, array.length));
 
         return node;
     }
 
-    prettyPrint(node, prefix = "", isLeft = true) {
+    prettyPrint(node = this.root, prefix = "", isLeft = true) {
         if (node.right !== null) {
             this.prettyPrint(
                 node.right,
@@ -61,14 +61,23 @@ export class Tree {
 
     delete(value, node = this.root) {
         if (node.value == value) {
-            console.log(node);
-            return;
+            if ((node.left === null && node.right === null) || node === null) {
+                return null;
+            } else if (node.left && node.right) {
+                let pointer = node.right;
+                while (pointer.left !== null) pointer = pointer.left;
+                node.value = pointer.value;
+                node.right = this.delete(node.value, node.right);
+            }
+
+            return node.left ? node.left : node.right;
         }
 
         if (node.value > value) {
-            this.delete(value, node.left);
+            node.left = this.delete(value, node.left);
         } else {
-            this.delete(value, node.right);
+            node.right = this.delete(value, node.right);
         }
+        return node;
     }
 }
