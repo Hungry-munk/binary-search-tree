@@ -9,9 +9,9 @@ export class Node {
 }
 
 export class Tree {
-    constructor(array) {
+    constructor(array, value = null) {
         this.array = mergeSort(removeDuplicates(array));
-        this.root = null;
+        this.root = new Node(value);
     }
 
     buildTree(Currentarray = this.array) {
@@ -42,6 +42,33 @@ export class Tree {
                 `${prefix}${isLeft ? "    " : "│   "}`,
                 true
             );
+        }
+    }
+
+    insert(value, node = this.root) {
+        if (node === null || node.value === value) {
+            return new Node(value);
+        }
+
+        if (node.value > value) {
+            node.left = this.insert(value, node.left);
+        } else {
+            node.right = this.insert(value, node.right);
+        }
+
+        return node;
+    }
+
+    delete(value, node = this.root) {
+        if (node.value == value) {
+            console.log(node);
+            return;
+        }
+
+        if (node.value > value) {
+            this.delete(value, node.left);
+        } else {
+            this.delete(value, node.right);
         }
     }
 }
