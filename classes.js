@@ -96,6 +96,16 @@ export class Tree {
                 : values.push(currentNode.value);
         }
 
-        if (!callBackFn) return values
+        if (!callBackFn) return values;
+    }
+
+    preOrder(callBackFn, node = this.root) {
+        if (!node) return [];
+        let values = [];
+
+        callBackFn ? callBackFn(node.value) : values.push(node.value);
+        values = values.concat(this.preOrder(callBackFn, node.left));
+        values = values.concat(this.preOrder(callBackFn, node.right));
+        if (values.length) return values;
     }
 }
