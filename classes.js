@@ -106,6 +106,29 @@ export class Tree {
         callBackFn ? callBackFn(node.value) : values.push(node.value);
         values = values.concat(this.preOrder(callBackFn, node.left));
         values = values.concat(this.preOrder(callBackFn, node.right));
-        if (values.length) return values;
+
+        if (!values.includes(undefined)) return values;
+    }
+
+    levelOrder(callBackFn, node = this.root) {
+        if (!node) return [];
+        let values = [];
+
+        values = values.concat(this.levelOrder(callBackFn, node.left));
+        callBackFn ? callBackFn(node.value) : values.push(node.value);
+        values = values.concat(this.levelOrder(callBackFn, node.right));
+
+        if (!values.includes(undefined)) return values;
+    }
+
+    postOrder(callBackFn, node = this.root) {
+        if (!node) return [];
+        let values = [];
+
+        values = values.concat(this.postOrder(callBackFn, node.left));
+        values = values.concat(this.postOrder(callBackFn, node.right));
+        callBackFn ? callBackFn(node.value) : values.push(node.value);
+
+        if (!values.includes(undefined)) return values;
     }
 }

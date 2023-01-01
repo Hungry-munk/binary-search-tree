@@ -5,4 +5,4 @@ const BST = new Tree(exampleArray);
 
 BST.root = BST.buildTree();
 BST.prettyPrint();
-console.log(BST.preOrder());
+console.log(BST.preOrder(console.log));
