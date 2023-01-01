@@ -28,7 +28,7 @@ export class Tree {
     }
 
     prettyPrint(node = this.root, prefix = "", isLeft = true) {
-        if (node.right !== null) {
+        if (node.right) {
             this.prettyPrint(
                 node.right,
                 `${prefix}${isLeft ? "│   " : "    "}`,
@@ -36,7 +36,7 @@ export class Tree {
             );
         }
         console.log(`${prefix}${isLeft ? "└── " : "┌── "}${node.value}`);
-        if (node.left !== null) {
+        if (node.left) {
             this.prettyPrint(
                 node.left,
                 `${prefix}${isLeft ? "    " : "│   "}`,
@@ -46,7 +46,7 @@ export class Tree {
     }
 
     insert(value, node = this.root) {
-        if (node === null || node.value === value) {
+        if (!node || node.value === value) {
             return new Node(value);
         }
 
@@ -61,11 +61,11 @@ export class Tree {
 
     delete(value, node = this.root) {
         if (node.value == value) {
-            if ((node.left === null && node.right === null) || node === null) {
+            if ((!node.left && !node.right) || !node) {
                 return null;
             } else if (node.left && node.right) {
                 let pointer = node.right;
-                while (pointer.left !== null) pointer = pointer.left;
+                while (pointer.left) pointer = pointer.left;
                 node.value = pointer.value;
                 node.right = this.delete(node.value, node.right);
             }
@@ -79,6 +79,18 @@ export class Tree {
             node.right = this.delete(value, node.right);
         }
         return node;
+    }
+
+    find(value, node = this.root) {
+        if (node.value == value) return node;
+
+        if (node.value > value) {
+            if (node.left) return this.find(value, node.left);
+        } else {
+            if (node.right) return this.find(value, node.right);
+        }
+
+        return null;
     }
 
     levelOrder(callBackFn) {
