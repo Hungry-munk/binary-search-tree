@@ -152,4 +152,15 @@ export class Tree {
 
         return Math.max(leftHeight, rightHeight) + 1;
     }
+
+    depth(searchedNode, recursiveNode = this.root, level = 0) {
+        if (searchedNode === recursiveNode) return level;
+        if (!recursiveNode) return;
+
+        if (searchedNode.value < recursiveNode.value) {
+            return this.depth(searchedNode, recursiveNode.left, level + 1);
+        } else {
+            return this.depth(searchedNode, recursiveNode.right, level + 1);
+        }
+    }
 }
