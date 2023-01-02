@@ -96,7 +96,7 @@ export class Tree {
     levelOrder(callBackFn) {
         //need root element
         if (!this.root) return [];
-        //  queue for storing discovere nodes
+        //  queue for storing discovered nodes
         const queue = [this.root];
         const values = [];
         while (queue.length) {
@@ -142,5 +142,14 @@ export class Tree {
         callBackFn ? callBackFn(node.value) : values.push(node.value);
 
         if (!values.includes(undefined)) return values;
+    }
+
+    height(node = this.root) {
+        if (!node) return -1;
+
+        const leftHeight = this.height(node.left);
+        const rightHeight = this.height(node.right);
+
+        return Math.max(leftHeight, rightHeight) + 1;
     }
 }
