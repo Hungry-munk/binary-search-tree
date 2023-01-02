@@ -23,3 +23,6 @@ P.S.
 I stole this README from someone elses TOP project but it does the exact same thing so it dont matter...
 
 but heres credits anyway: https://github.com/JoshDevHub/JavaScript-Binary-Search-Tree
+
+P.S after completing the project I now relise I could have made all the recursive functions with the root/node param could have just converted into a function that return another recursive util funciton or whatever you call it, a lot like the isBalnced() method in the Tree class.
+This stops potential error when programming however that is not the purpose of this project so I will not change all of the functions.
