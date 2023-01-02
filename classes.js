@@ -1,3 +1,4 @@
+import { parseAsync } from "@babel/core";
 import { mergeSort, removeDuplicates } from "./arrayFuncs.js";
 
 export class Node {
@@ -162,5 +163,21 @@ export class Tree {
         } else {
             return this.depth(searchedNode, recursiveNode.right, level + 1);
         }
+    }
+
+    isBalanced() {
+        return (function utilDfs(node) {
+            if (!node) return [true, 0];
+            const [left, right] = [utilDfs(node.left), utilDfs(node.right)];
+            const balanced =
+                Math.abs(left[1] - right[1]) <= 1 && left[0] && right[0];
+
+            return [balanced, 1 + Math.max(left[1], right[1])];
+        })(this.root)[0];
+    }
+
+    reBalance() {
+        // could have used an dfs method to get array of values
+        this.root = this.buildTree(mergeSort(this.preOrder()));
     }
 }
